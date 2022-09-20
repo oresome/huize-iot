@@ -1,0 +1,5 @@
+numpy
+pandas
+streamlit==1.8.1
+protobuf~=3.19.0
+pyecharts==1.9.1
