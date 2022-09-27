@@ -97,7 +97,7 @@ def main():
     sensen1_data = 13
     sensen2_data = 14
     sensen3_data = 12
-    sensen4_data = 13
+    sensen4_data = 12
 
 
     ###  第一部分  模型展示  ###
