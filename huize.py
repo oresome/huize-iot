@@ -1,23 +1,38 @@
 import streamlit as st
 import streamlit.components.v1 as components
 from datetime import datetime, date
-import pyecharts.options as opts
-from pyecharts.charts import Gauge
+import plotly.graph_objects as go
+#import pyecharts.options as opts
+#from pyecharts.charts import Gauge
 # mapbox_access_token = open(".mapbox_token").read()
 #def SMOOTH_CURVE(data, window):
 #    yhat = savgol_filter(data, window, 3)
 #    return yhat
-def PLOT_GAUGE(Pre):
+#def PLOT_GAUGE(Pre):#
+#
+#    c = (
+#        Gauge(init_opts=opts.InitOpts(width = "500px", height="400px"))
+#        .add("压力传感器 - MPa", [(" ", Pre)], min_=0.0, max_=10.0)
+#        .set_global_opts(title_opts=opts.TitleOpts(title=""))
+#        .render("gauge_base.html")
+#    )#
+#
+#    return
 
-    c = (
-        Gauge(init_opts=opts.InitOpts(width = "500px", height="400px"))
-        .add("压力传感器 - MPa", [(" ", Pre)], min_=0.0, max_=10.0)
-        .set_global_opts(title_opts=opts.TitleOpts(title=""))
-        .render("gauge_base.html")
-    )
+def plotly_gauge(pressure):
+    fig = go.Figure(go.Indicator(
+        domain = {'x': [0, 1], 'y': [0, 1]},
+        value = pressure,
+        mode = "gauge+number+delta",
+        title = {'text': "压力 - MPa"},
+        delta = {'reference': 3.0},
+        gauge = {'axis': {'range': [None, 8.0]},
+                'steps' : [
+                    {'range': [0, 3.0], 'color': "lightgray"},
+                    {'range': [3.0, 6.0], 'color': "gray"}],
+                'threshold' : {'line': {'color': "red", 'width': 4}, 'thickness': 0.75, 'value': 7.9}}))
 
-    return
-
+    return fig
 
 
 def WEAR_DATA_PARSE(wf):
@@ -33,7 +48,7 @@ def WEAR_DATA_PARSE(wf):
 
 
 def main():
-    st.set_page_config(page_title="Bradken ADVANCED IoT", layout="wide", initial_sidebar_state='auto')
+    st.set_page_config(page_title="有色院IoT", layout="wide", initial_sidebar_state='auto')
     st.markdown(
         f"""
             <style>
@@ -49,17 +64,17 @@ def main():
             """,
         unsafe_allow_html=True,
     )
-    page = st.markdown(
-                f"""
-                <style>
-                .stApp {{
-                    background: url("https://kycg.s3.ap-east-1.amazonaws.com/sidebarBG.png");
-                    background-size: cover
-                }}
-                </style>
-                """,
-                unsafe_allow_html=True,
-    )
+    #page = st.markdown(
+    ##            f"""
+    #            <style>
+    #            .stApp {{
+    #                background: url("https://kycg.s3.ap-east-1.amazonaws.com/sidebarBG.png");
+    #                background-size: cover
+    #            }}
+    #            </style>
+    #            """,
+    #            unsafe_allow_html=True,
+    #)
 
     # define files dir for all inputs
     #     cwd = os.getcwd()
@@ -149,10 +164,11 @@ def main():
         st.metric(label="当前磨损状态", value=current_thickness4, delta=delta_thickness4)
     with col3:
         # echats
-        PLOT_GAUGE(3.4)
-        HtmlFile = open("gauge_base.html", "r", encoding='utf-8')
-        source_code_2 = HtmlFile.read()
-        components.html(source_code_2, height=400)
+        fig = plotly_gauge(3.4)
+        #HtmlFile = open("gauge_base.html", "r", encoding='utf-8')
+        #source_code_2 = HtmlFile.read()
+        #components.html(source_code_2, height=400)
+        st.plotly_chart(fig, use_container_width=False)
         
     
     
