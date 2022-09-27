@@ -168,7 +168,7 @@ def main():
         #HtmlFile = open("gauge_base.html", "r", encoding='utf-8')
         #source_code_2 = HtmlFile.read()
         #components.html(source_code_2, height=400)
-        st.plotly_chart(fig, use_container_width=False)
+        st.plotly_chart(fig, use_container_width=True)
         
     
     
