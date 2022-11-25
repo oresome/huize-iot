@@ -159,14 +159,14 @@ def app():
         current_thickness3 = str(sensor3_lines[-1]-5) + " mm"
         delta_thickness3 = str(sensor3_lines[-1]-15) + " mm"
         st.markdown("最新状态时间：" + dateTime[-1])
-        st.metric(label="当前磨损状态", value=current_thickness3, delta=delta_thickness3)
+        st.metric(label="当前磨损状态", value="未安装")
         #with col4:
         st.markdown("###")
         st.subheader("#4磨损传感器当前状态")
         current_thickness4 = str(sensor4_lines[-1]-5) + " mm"
         delta_thickness4 = str(sensor4_lines[-1]-15) + " mm"
         st.markdown("最新状态时间：" + dateTime[-1])
-        st.metric(label="当前磨损状态", value=current_thickness4, delta=delta_thickness4)
+        st.metric(label="当前磨损状态", value="未安装")
     with col3:
         # echats
         st.image('page2.png', caption='传感器安装示意图')
