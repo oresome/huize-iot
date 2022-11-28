@@ -49,7 +49,7 @@ def dataParser(resultsFile):
     return dateTime, sensor1_lines, sensor2_lines, sensor3_lines, sensor4_lines
 
 
-@st.cache(persist=True)
+
 def serieschart_plot(dateTime, sensor1_lines, sensor2_lines, sensor3_lines, sensor4_lines):
     # plot time sereis chart
     #dtm = []
