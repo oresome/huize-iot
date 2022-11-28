@@ -4,6 +4,7 @@ from datetime import datetime, date
 import plotly.graph_objects as go
 from numpy.random import seed
 from numpy.random import randn
+import pytz
 
 def plotly_gauge(pressure):
     fig = go.Figure(go.Indicator(
@@ -142,9 +143,9 @@ def app():
         st.subheader("#1磨损传感器当前状态")
         current_thickness1 = str(sensor1_lines[-1]-5) + " mm"
         delta_thickness1 = str(sensor1_lines[-1]-15) + " mm"
-        #st.markdown(dateTime)
-        #st.markdown(sensor1_lines[-1])
-        st.markdown("最新状态时间： " + dateTime[-1])
+        hktimez = pytz.timezone("Asia/Hong_Kong") 
+        timenowhk = datetime.now(hktimez)
+        st.markdown("最新状态时间： " + timenowhk.strftime('%Y-%m-%d %H:%M:%S'))
         st.metric(label="当前磨损状态", value=current_thickness1, delta=delta_thickness1)
 
         #
@@ -152,20 +153,26 @@ def app():
         st.subheader("#2磨损传感器当前状态")
         current_thickness2 = str(sensor2_lines[-1]-5) + " mm"
         delta_thickness2 = str(sensor2_lines[-1]-15) + " mm"
-        st.markdown("最新状态时间：" + dateTime[-1])
+        hktimez = pytz.timezone("Asia/Hong_Kong") 
+        timenowhk = datetime.now(hktimez)
+        st.markdown("最新状态时间： " + timenowhk.strftime('%Y-%m-%d %H:%M:%S'))
         st.metric(label="当前磨损状态", value=current_thickness2, delta=delta_thickness2)
     with col2:
         st.subheader("#3磨损传感器当前状态")
         current_thickness3 = str(sensor3_lines[-1]-5) + " mm"
         delta_thickness3 = str(sensor3_lines[-1]-15) + " mm"
-        st.markdown("最新状态时间：" + dateTime[-1])
+        hktimez = pytz.timezone("Asia/Hong_Kong") 
+        timenowhk = datetime.now(hktimez)
+        st.markdown("最新状态时间： " + timenowhk.strftime('%Y-%m-%d %H:%M:%S'))
         st.metric(label="当前磨损状态", value=current_thickness3, delta=delta_thickness3)
         #with col4:
         st.markdown("###")
         st.subheader("#4磨损传感器当前状态")
         current_thickness4 = str(sensor4_lines[-1]-5) + " mm"
         delta_thickness4 = str(sensor4_lines[-1]-15) + " mm"
-        st.markdown("最新状态时间：" + dateTime[-1])
+        hktimez = pytz.timezone("Asia/Hong_Kong") 
+        timenowhk = datetime.now(hktimez)
+        st.markdown("最新状态时间： " + timenowhk.strftime('%Y-%m-%d %H:%M:%S'))
         st.metric(label="当前磨损状态", value=current_thickness4, delta=delta_thickness4)
     with col3:
         # echats
@@ -178,8 +185,9 @@ def app():
     col11, col22, col33 = st.columns(3)
     with col11:
         st.subheader("压力传感器当前状态")
-        #st.markdown("###")
-        st.markdown("最新状态时间：" + dateTime[-1])
+        hktimez = pytz.timezone("Asia/Hong_Kong") 
+        timenowhk = datetime.now(hktimez)
+        st.markdown("最新状态时间： " + timenowhk.strftime('%Y-%m-%d %H:%M:%S'))
         seed(1)
         # generate some Gaussian values
         values = randn(1)/5
