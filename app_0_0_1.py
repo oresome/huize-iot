@@ -4,7 +4,7 @@ from multipage import MultiPage
 from pages import page1, page2, page3, page4, page5, page6
 
 MAGE_EMOJI_URL = "streamlitBKN.png"
-st.set_page_config(page_title='Bradken GRIND MASTER',page_icon=MAGE_EMOJI_URL, initial_sidebar_state = 'auto', layout="wide")
+st.set_page_config(page_title='长沙有色IoT',page_icon=MAGE_EMOJI_URL, initial_sidebar_state = 'auto', layout="wide")
 #page_icon = favicon,
 st.markdown(
         f"""
@@ -29,9 +29,9 @@ st.markdown(
 app = MultiPage()
 
 # add applications
-app.add_page('📘  1764斜坡道287号-瑞钛管', page1.app)
-app.add_page('📕  1764转弯口-瑞钛弯管', page2.app)
-app.add_page('📗  1764充填井连道口-瑞钛管', page3.app)
+app.add_page('📘  1764斜坡道287号-POE耐磨管', page1.app)
+app.add_page('📕  1764转弯口-POE耐磨管', page2.app)
+app.add_page('📗  1764充填井连道口-POE耐磨管', page3.app)
 app.add_page('📔  1764斜坡道288号-钢管', page4.app)
 app.add_page('📒  1404井口-钢管', page5.app)
 app.add_page('📙  1398井筒-钢管', page6.app)
