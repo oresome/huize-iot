@@ -121,7 +121,7 @@ def app():
             #st.title("长沙有色院-充填管道智能磨损在线监测系统")
             #st.title("云南驰宏锌锗-会泽矿业")
             st.title("安装工位：1764斜坡道287号")
-            st.title("管道材料：江西瑞钛管道")
+            st.title("管道材料：POE耐磨管道")
             st.subheader("当前状态（在运行） ")
             installDate = date(2022, 11, 10)
             currentDate = date.today()
