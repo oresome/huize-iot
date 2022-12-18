@@ -2,11 +2,12 @@ import streamlit as st
 import streamlit.components.v1 as components
 from datetime import datetime, date
 import plotly.graph_objects as go
-from numpy.random import seed
-from numpy.random import randn
+import pandas as pd
+import random
 import pytz
 
 def plotly_gauge(pressure):
+    config = {'displayModeBar': False}
     fig = go.Figure(go.Indicator(
         domain = {'x': [0, 1], 'y': [0, 1]},
         value = pressure,
@@ -19,9 +20,17 @@ def plotly_gauge(pressure):
                     {'range': [3.0, 6.0], 'color': "gray"}],
                 'threshold' : {'line': {'color': "red", 'width': 4}, 'thickness': 0.75, 'value': 7.9}}))
 
+    fig.update_layout(
+        margin=dict(l=1, r=1, t=1, b=1),
+        font=dict(
+                family="Ubuntu, regular",
+                size=10,
+                color="Black"
+        )
+    )
+
+    #fig.write_html("pressureGauge.html", config=config)
     return fig
-
-
 
 def dataParser(resultsFile):
     sensor1_ID = 'F 0 64 D4 A 75 1 0 0 1 25 29 C 0 48'
@@ -111,6 +120,7 @@ def app():
     #############################################################################
     resultsFile = "sensorData/tcp_3207.txt"
     dateTime, sensor1_lines, sensor2_lines, sensor3_lines, sensor4_lines = dataParser(resultsFile)
+    location = 1764
 
 
     ###  第一部分  模型展示  ###
@@ -188,15 +198,25 @@ def app():
         hktimez = pytz.timezone("Asia/Hong_Kong") 
         timenowhk = datetime.now(hktimez)
         st.markdown("最新状态时间： " + timenowhk.strftime('%Y-%m-%d %H:%M:%S'))
-        seed(1)
-        # generate some Gaussian values
-        values = randn(1)/5
-        finalV = 6.3 + values[0]
+
+        ####################---------------get Pressure Data---------------####################### 
+        # Read the pressure value
+        presureDF = pd.read_csv('randomP.csv', header = None, names=['idle', 'loc1764', 'loc1404'])
+
+        today8pm = timenowhk.replace(hour=20, minute=5, second=0, microsecond=0)
+        if timenowhk >= today8pm and location == 1764:
+            finalV = random.choice(presureDF['loc1764'])
+        elif timenowhk >= today8pm and location == 1404:
+            finalV = random.choice(presureDF['loc1404'])
+        else:
+            finalV = random.choice(presureDF['idle'])
+            #st.markdown(finalV)
+
         fig = plotly_gauge(finalV)
         #HtmlFile = open("gauge_base.html", "r", encoding='utf-8')
         #source_code_2 = HtmlFile.read()
         #components.html(source_code_2, height=400)
-        st.plotly_chart(fig, use_container_width=False)
+        st.plotly_chart(fig, use_container_width=True)
         
 
 
