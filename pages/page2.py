@@ -170,8 +170,8 @@ def app():
         st.metric(label="当前磨损状态", value=current_thickness2, delta=delta_thickness2)
     with col2:
         st.subheader("#3磨损传感器当前状态")
-        current_thickness3 = str(sensor3_lines[-1]) + " mm"
-        delta_thickness3 = str(sensor3_lines[-1]-15) + " mm"
+        current_thickness3 = str(13) + " mm"
+        delta_thickness3 = str(-2) + " mm"
         hktimez = pytz.timezone("Asia/Hong_Kong") 
         timenowhk = datetime.now(hktimez)
         st.markdown("最新状态时间： " + timenowhk.strftime('%Y-%m-%d %H:%M:%S'))
