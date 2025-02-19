@@ -1,7 +1,7 @@
 # coding=utf-8
 import streamlit as st
 from multipage import MultiPage
-from pages import page1, page2, page3, page4, page5, page6
+from spages import page1, page2, page3, page4, page5, page6
 
 MAGE_EMOJI_URL = "streamlitBKN.png"
 st.set_page_config(page_title='长沙有色IoT',page_icon=MAGE_EMOJI_URL, initial_sidebar_state = 'auto', layout="wide")
